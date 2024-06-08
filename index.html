@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Intl Explorer</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="top-nav">
+      <h1>Intl Explorer</h1>
+      <nav>
+        <ul>
+          <li>
+            <a href="#">DateTimeFormat</a>
+          </li>
+          <li>
+            <a href="#">RelativeTimeFormat</a>
+          </li>
+          <li>
+            <a href="#">NumberFormat</a>
+          </li>
+          <li>
+            <a href="#">ListFormat</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="display" class="container">
+        <header><h2>Output</h2></header>
+        <div class="container-content">
+          <span id="time-display"></span>
+        </div>
+
+      </section>
+      <section id="code" class="container">
+        <header><h2>Code</h2></header>
+        <div class="container-content">
+          <code>
+            <pre id="code-display"></pre>
+          </code>
+        </div>
+      </section>
+      <form id="options" class="container">
+        <header><h2>Options</h2></header>
+        <div class="container-content">
+          <fieldset id="locale-options" class="options-container">
+            <legend>Locale Options</legend>
+
+            <section>
+              <label for="current-locale">
+                Locale
+                <input type="text" name="current-locale" id="current-locale" />
+              </label>
+            </section>
+            <section>
+              <label for="current-tz">
+                Time Zone
+                <input type="text" name="current-tz" id="current-tz" />
+              </label>
+            </section>
+            <section id="advanced-options-hour12" class="radio-container">
+              <h3>Use Hour 12</h3>
+              <div class="radio-group">
+                <label class="radio-input" for="advanced-options-hour12-true">
+                  <input type="radio" name="advanced-options-hour12" id="advanced-options-hour12-true" value="true" />
+                  <span>True</span>
+                </label>
+                <label class="radio-input" for="advanced-options-hour12-false">
+                  <input type="radio" name="advanced-options-hour12" id="advanced-options-hour12-false" value="false" />
+                  <span>False</span>
+                </label>
+                <label class="radio-input" for="advanced-options-hour12-unset">
+                  <input
+                    type="radio"
+                    name="advanced-options-hour12"
+                    id="advanced-options-hour12-unset"
+                    value="unset"
+                    checked
+                  />
+                  Unset
+                </label>
+              </div>
+            </section>
+            <section id="advanced-options-hour-cycle" class="radio-container">
+              <h3>Hour Cycle</h3>
+              <div class="radio-group">
+                <label class="radio-input" for="advanced-options-hour-cycle-h11">
+                  <input
+                    type="radio"
+                    name="advanced-options-hour-cycle"
+                    id="advanced-options-hour-cycle-h11"
+                    value="h11"
+                  />
+                  h11
+                </label>
+                <label class="radio-input" for="advanced-options-hour-cycle-h12">
+                  <input
+                    type="radio"
+                    name="advanced-options-hour-cycle"
+                    id="advanced-options-hour-cycle-h12"
+                    value="h12"
+                  />
+                  h12
+                </label>
+                <label class="radio-input" for="advanced-options-hour-cycle-h23">
+                  <input
+                    type="radio"
+                    name="advanced-options-hour-cycle"
+                    id="advanced-options-hour-cycle-h23"
+                    value="h23"
+                  />
+                  h23
+                </label>
+                <label class="radio-input" for="advanced-options-hour-cycle-h24">
+                  <input
+                    type="radio"
+                    name="advanced-options-hour-cycle"
+                    id="advanced-options-hour-cycle-h24"
+                    value="h24"
+                  />
+                  h24
+                </label>
+                <label class="radio-input" for="advanced-options-hour-cycle-unset">
+                  <input
+                    type="radio"
+                    name="advanced-options-hour-cycle"
+                    id="advanced-options-hour-cycle-unset"
+                    value="unset"
+                    checked
+                  />
+                  Unset
+                </label>
+              </div>
+            </section>
+          </fieldset>
+
+          <fieldset id="top-options" class="options-container">
+            <legend>Format Options</legend>
+            <section class="radio-container">
+              <h3>Choose Formatting Style</h3>
+              <div class="radio-group">
+                <label class="radio-input" for="use-basic-options">
+                  <input type="radio" name="top-options" id="use-basic-options" value="basic" checked />
+                  Basic Options
+                </label>
+                <label class="radio-input" for="use-full-options">
+                  <input type="radio" name="top-options" id="use-full-options" value="full" />
+                  Full Options
+                </label>
+              </div>
+            </section>
+
+            <section>
+              <h3>Form Options</h3>
+              <input type="reset" id="reset-form" value="Reset Form" />
+            </section>
+          </fieldset>
+          <fieldset id="basic-options" class="options-container">
+            <legend>Basic Formatting Options</legend>
+
+            <section class="radio-container">
+              <h3>Date Options</h3>
+              <div class="radio-group">
+                <label class="radio-input" for="basic-date-options-full">
+                  <input type="radio" name="basic-date-options" id="basic-date-options-full" value="full" checked />
+                  Full
+                </label>
+                <label class="radio-input" for="basic-date-options-long">
+                  <input type="radio" name="basic-date-options" id="basic-date-options-long" value="long" />
+                  Long
+                </label>
+                <label class="radio-input" for="basic-date-options-medium">
+                  <input type="radio" name="basic-date-options" id="basic-date-options-medium" value="medium" />
+                  Medium
+                </label>
+                <label class="radio-input" for="basic-date-options-short">
+                  <input type="radio" name="basic-date-options" id="basic-date-options-short" value="short" />
+                  Short
+                </label>
+              </div>
+            </section>
+            <section class="radio-container">
+              <h3>Time Options</h3>
+              <div class="radio-group">
+                <label class="radio-input" for="basic-time-options-full">
+                  <input type="radio" name="basic-time-options" id="basic-time-options-full" value="full" checked />
+                  Full
+                </label>
+                <label class="radio-input" for="basic-time-options-long">
+                  <input type="radio" name="basic-time-options" id="basic-time-options-long" value="long" />
+                  Long
+                </label>
+                <label class="radio-input" for="basic-time-options-medium">
+                  <input type="radio" name="basic-time-options" id="basic-time-options-medium" value="medium" />
+                  Medium
+                </label>
+                <label class="radio-input" for="basic-time-options-short">
+                  <input type="radio" name="basic-time-options" id="basic-time-options-short" value="short" />
+                  Short
+                </label>
+              </div>
+            </section>
+          </fieldset>
+
+          <fieldset id="datetime-options" class="options-container">
+            <legend>Date/Time Formatting Options</legend>
+
+            <section id="datetime-options-year" class="radio-container">
+              <h3>Year</h3>
+              <div class="radio-group">
+                <label class="radio-input" for="datetime-options-year-2-digit">
+                  <input type="radio" name="datetime-options-year" id="datetime-options-year-2-digit" value="2-digit" />
+                  2-Digit
+                </label>
+                <label class="radio-input" for="datetime-options-year-numeric">
+                  <input type="radio" name="datetime-options-year" id="datetime-options-year-numeric" value="numeric" />
+                  Numeric
+                </label>
+                <label class="radio-input" for="datetime-options-year-unset">
+                  <input
+                    type="radio"
+                    name="datetime-options-year"
+                    id="datetime-options-year-unset"
+                    value="unset"
+                    checked
+                  />
+                  Unset
+                </label>
+              </div>
+            </section>
+            <section id="datetime-options-month" class="radio-container">
+              <h3>Month</h3>
+              <div class="radio-group">
+                <label class="radio-input" for="datetime-options-month-2-digit">
+                  <input type="radio" name="datetime-options-month" id="datetime-options-month-2-digit" value="2-digit" />
+                  2-Digit
+                </label>
+                <label class="radio-input" for="datetime-options-month-numeric">
+                  <input type="radio" name="datetime-options-month" id="datetime-options-month-numeric" value="numeric" />
+                  Numeric
+                </label>
+                <label class="radio-input" for="datetime-options-month-narrow">
+                  <input type="radio" name="datetime-options-month" id="datetime-options-month-narrow" value="narrow" />
+                  Narrow
+                </label>
+                <label class="radio-input" for="datetime-options-month-short">
+                  <input type="radio" name="datetime-options-month" id="datetime-options-month-short" value="short" />
+                  Short
+                </label>
+                <label class="radio-input" for="datetime-options-month-long">
+                  <input type="radio" name="datetime-options-month" id="datetime-options-month-long" value="long" />
+                  Long
+                </label>
+                <label class="radio-input" for="datetime-options-month-unset">
+                  <input
+                    type="radio"
+                    name="datetime-options-month"
+                    id="datetime-options-month-unset"
+                    value="unset"
+                    checked
+                  />
+                  Unset
+                </label>
+              </div>
+            </section>
+            <section id="datetime-options-day" class="radio-container">
+              <h3>Day</h3>
+              <div class="radio-group">
+                <label class="radio-input" for="datetime-options-day-2-digit">
+                  <input type="radio" name="datetime-options-day" id="datetime-options-day-2-digit" value="2-digit" />
+                  2-Digit
+                </label>
+                <label class="radio-input" for="datetime-options-day-numeric">
+                  <input type="radio" name="datetime-options-day" id="datetime-options-day-numeric" value="numeric" />
+                  Numeric
+                </label>
+                <label class="radio-input" for="datetime-options-day-unset">
+                  <input type="radio" name="datetime-options-day" id="datetime-options-day-unset" value="unset" checked />
+                  Unset
+                </label>
+              </div>
+            </section>
+            <section id="datetime-options-day-period" class="radio-container">
+              <h3>Day Period</h3>
+              <div class="radio-group">
+                <label class="radio-input" for="datetime-options-day-period-narrow">
+                  <input
+                    type="radio"
+                    name="datetime-options-day-period"
+                    id="datetime-options-day-period-narrow"
+                    value="narrow"
+                  />
+                  Narrow
+                </label>
+                <label class="radio-input" for="datetime-options-day-period-short">
+                  <input
+                    type="radio"
+                    name="datetime-options-day-period"
+                    id="datetime-options-day-period-short"
+                    value="short"
+                  />
+                  Short
+                </label>
+                <label class="radio-input" for="datetime-options-day-period-long">
+                  <input
+                    type="radio"
+                    name="datetime-options-day-period"
+                    id="datetime-options-day-period-long"
+                    value="long"
+                  />
+                  Long
+                </label>
+                <label class="radio-input" for="datetime-options-day-period-unset">
+                  <input
+                    type="radio"
+                    name="datetime-options-day-period"
+                    id="datetime-options-day-period-unset"
+                    value="unset"
+                    checked
+                  />
+                  Unset
+                </label>
+              </div>
+            </section>
+            <section id="datetime-options-weekday" class="radio-container">
+              <h3>Weekday</h3>
+              <div class="radio-group">
+                <label class="radio-input" for="datetime-options-weekday-narrow">
+                  <input
+                    type="radio"
+                    name="datetime-options-weekday"
+                    id="datetime-options-weekday-narrow"
+                    value="narrow"
+                  />
+                  Narrow
+                </label>
+                <label class="radio-input" for="datetime-options-weekday-short">
+                  <input type="radio" name="datetime-options-weekday" id="datetime-options-weekday-short" value="short" />
+                  Short
+                </label>
+                <label class="radio-input" for="datetime-options-weekday-long">
+                  <input type="radio" name="datetime-options-weekday" id="datetime-options-weekday-long" value="long" />
+                  Long
+                </label>
+                <label class="radio-input" for="datetime-options-weekday-unset">
+                  <input
+                    type="radio"
+                    name="datetime-options-weekday"
+                    id="datetime-options-weekday-unset"
+                    value="unset"
+                    checked
+                  />
+                  Unset
+                </label>
+              </div>
+            </section>
+            <section id="datetime-options-era" class="radio-container">
+              <h3>Era</h3>
+              <div class="radio-group">
+                <label class="radio-input" for="datetime-options-era-narrow">
+                  <input type="radio" name="datetime-options-era" id="datetime-options-era-narrow" value="narrow" />
+                  Narrow
+                </label>
+                <label class="radio-input" for="datetime-options-era-short">
+                  <input type="radio" name="datetime-options-era" id="datetime-options-era-short" value="short" />
+                  Short
+                </label>
+                <label class="radio-input" for="datetime-options-era-long">
+                  <input type="radio" name="datetime-options-era" id="datetime-options-era-long" value="long" />
+                  Long
+                </label>
+                <label class="radio-input" for="datetime-options-era-unset">
+                  <input type="radio" name="datetime-options-era" id="datetime-options-era-unset" value="unset" checked />
+                  Unset
+                </label>
+              </div>
+            </section>
+            <section id="datetime-options-hour" class="radio-container">
+              <h3>Hour</h3>
+              <div class="radio-group">
+                <label class="radio-input" for="datetime-options-hour-2-digit">
+                  <input type="radio" name="datetime-options-hour" id="datetime-options-hour-2-digit" value="2-digit" />
+                  2-Digit
+                </label>
+                <label class="radio-input" for="datetime-options-hour-numeric">
+                  <input type="radio" name="datetime-options-hour" id="datetime-options-hour-numeric" value="numeric" />
+                  Numeric
+                </label>
+                <label class="radio-input" for="datetime-options-hour-unset">
+                  <input
+                    type="radio"
+                    name="datetime-options-hour"
+                    id="datetime-options-hour-unset"
+                    value="unset"
+                    checked
+                  />
+                  Unset
+                </label>
+              </div>
+            </section>
+            <section id="datetime-options-minute" class="radio-container">
+              <h3>Minute</h3>
+              <div class="radio-group">
+                <label class="radio-input" for="datetime-options-minute-2-digit">
+                  <input
+                    type="radio"
+                    name="datetime-options-minute"
+                    id="datetime-options-minute-2-digit"
+                    value="2-digit"
+                  />
+                  2-Digit
+                </label>
+                <label class="radio-input" for="datetime-options-minute-numeric">
+                  <input
+                    type="radio"
+                    name="datetime-options-minute"
+                    id="datetime-options-minute-numeric"
+                    value="numeric"
+                  />
+                  Numeric
+                </label>
+                <label class="radio-input" for="datetime-options-minute-unset">
+                  <input
+                    type="radio"
+                    name="datetime-options-minute"
+                    id="datetime-options-minute-unset"
+                    value="unset"
+                    checked
+                  />
+                  Unset
+                </label>
+              </div>
+            </section>
+            <section id="datetime-options-second" class="radio-container">
+              <h3>Second</h3>
+              <div class="radio-group">
+                <label class="radio-input" for="datetime-options-second-2-digit">
+                  <input
+                    type="radio"
+                    name="datetime-options-second"
+                    id="datetime-options-second-2-digit"
+                    value="2-digit"
+                  />
+                  2-Digit
+                </label>
+                <label class="radio-input" for="datetime-options-second-numeric">
+                  <input
+                    type="radio"
+                    name="datetime-options-second"
+                    id="datetime-options-second-numeric"
+                    value="numeric"
+                  />
+                  Numeric
+                </label>
+                <label class="radio-input" for="datetime-options-second-unset">
+                  <input
+                    type="radio"
+                    name="datetime-options-second"
+                    id="datetime-options-second-unset"
+                    value="unset"
+                    checked
+                  />
+                  Unset
+                </label>
+              </div>
+            </section>
+            <section id="datetime-options-second-frac" class="radio-container">
+              <h3>Second Fractional Digits</h3>
+              <div class="radio-group">
+                <label class="radio-input" for="datetime-options-second-frac-1">
+                  <input type="radio" name="datetime-options-second-frac" id="datetime-options-second-frac-1" value="1" />
+                  1
+                </label>
+                <label class="radio-input" for="datetime-options-second-frac-2">
+                  <input type="radio" name="datetime-options-second-frac" id="datetime-options-second-frac-2" value="2" />
+                  2
+                </label>
+                <label class="radio-input" for="datetime-options-second-frac-3">
+                  <input type="radio" name="datetime-options-second-frac" id="datetime-options-second-frac-3" value="3" />
+                  3
+                </label>
+                <label class="radio-input" for="datetime-options-second-frac-unset">
+                  <input
+                    type="radio"
+                    name="datetime-options-second-frac"
+                    id="datetime-options-second-frac-unset"
+                    value="unset"
+                    checked
+                  />
+                  Unset
+                </label>
+              </div>
+            </section>
+            <section id="datetime-options-tz-name" class="radio-container" data-stretch="true">
+              <h3>Time Zone Name</h3>
+              <div class="radio-group">
+                <label class="radio-input" for="datetime-options-tz-name-short">
+                  <input type="radio" name="datetime-options-tz-name" id="datetime-options-tz-name-short" value="short" />
+                  Short
+                </label>
+                <label class="radio-input" for="datetime-options-tz-name-long">
+                  <input type="radio" name="datetime-options-tz-name" id="datetime-options-tz-name-long" value="long" />
+                  Long
+                </label>
+                <label class="radio-input" for="datetime-options-tz-name-short-offset">
+                  <input
+                    type="radio"
+                    name="datetime-options-tz-name"
+                    id="datetime-options-tz-name-short-offset"
+                    value="shortOffset"
+                  />
+                  Short Offset
+                </label>
+                <label class="radio-input" for="datetime-options-tz-name-long-offset">
+                  <input
+                    type="radio"
+                    name="datetime-options-tz-name"
+                    id="datetime-options-tz-name-long-offset"
+                    value="longOffset"
+                  />
+                  Long Offset
+                </label>
+                <label class="radio-input" for="datetime-options-tz-name-short-generic">
+                  <input
+                    type="radio"
+                    name="datetime-options-tz-name"
+                    id="datetime-options-tz-name-short-generic"
+                    value="shortGeneric"
+                  />
+                  Short Generic
+                </label>
+                <label class="radio-input" for="datetime-options-tz-name-long-generic">
+                  <input
+                    type="radio"
+                    name="datetime-options-tz-name"
+                    id="datetime-options-tz-name-long-generic"
+                    value="longGeneric"
+                  />
+                  Long Generic
+                </label>
+                <label class="radio-input" for="datetime-options-tz-name-unset">
+                  <input
+                    type="radio"
+                    name="datetime-options-tz-name"
+                    id="datetime-options-tz-name-unset"
+                    value="unset"
+                    checked
+                  />
+                  Unset
+                </label>
+              </div>
+            </section>
+          </fieldset>
+
+          <fieldset id="advanced-options" class="options-container">
+            <legend>Advanced Options</legend>
+            <section id="advanced-options-locale-matcher" class="radio-container">
+              <h3>Locale Matcher</h3>
+              <div class="radio-group">
+                <label class="radio-input" for="advanced-options-locale-matcher-lookup">
+                  <input
+                    type="radio"
+                    name="advanced-options-locale-matcher"
+                    id="advanced-options-locale-matcher-lookup"
+                    value="lookup"
+                  />
+                  Lookup
+                </label>
+                <label class="radio-input" for="advanced-options-locale-matcher-best-fit">
+                  <input
+                    type="radio"
+                    name="advanced-options-locale-matcher"
+                    id="advanced-options-locale-matcher-best-fit"
+                    value="best fit"
+                    checked
+                  />
+                  Best Fit (default)
+                </label>
+              </div>
+            </section>
+            <section id="advanced-options-format-matcher" class="radio-container">
+              <h3>Format Matcher</h3>
+              <div class="radio-group">
+                <label class="radio-input" for="advanced-options-format-matcher-lookup">
+                  <input
+                    type="radio"
+                    name="advanced-options-format-matcher"
+                    id="advanced-options-format-matcher-lookup"
+                    value="lookup"
+                  />
+                  Lookup
+                </label>
+                <label class="radio-input" for="advanced-options-format-matcher-best-fit">
+                  <input
+                    type="radio"
+                    name="advanced-options-format-matcher"
+                    id="advanced-options-format-matcher-best-fit"
+                    value="best fit"
+                    checked
+                  />
+                  Best Fit (default)
+                </label>
+              </div>
+            </section>
+          </fieldset>
+        </div>
+      </form>
+    </main>
+
+    <script type="module">
+      /* DOM Elements */
+      const $timeDisplay = document.getElementById("time-display");
+      const $codeDisplay = document.getElementById("code-display");
+      const $form = document.getElementById("options");
+      const $resetBtn = document.getElementById("reset-form");
+
+      const $basicOptions = document.getElementById("basic-options");
+      const $dateTimeOptions = document.getElementById("datetime-options");
+      const $localeInput = document.getElementById("current-locale");
+
+      const DATE_TIME_OPTION_IDS = [
+        "datetime-options-year",
+        "datetime-options-month",
+        "datetime-options-day",
+        "datetime-options-day-period",
+        "datetime-options-weekday",
+        "datetime-options-era",
+        "datetime-options-hour",
+        "datetime-options-minute",
+        "datetime-options-second",
+        "datetime-options-second-frac",
+        "datetime-options-tz-name",
+      ];
+
+      /* Formatter */
+      function getFieldValue(fieldName) {
+        const val = $form.elements[fieldName].value;
+        return val === "unset" ? undefined : val;
+      }
+
+      function getOptions() {
+        const useBasicOptions = getFieldValue("top-options") === "basic";
+
+        const advancedOptions = {
+          hour12:
+            getFieldValue("advanced-options-hour12") === undefined
+              ? undefined
+              : getFieldValue("advanced-options-hour12") === "true",
+          hourCycle: getFieldValue("advanced-options-hour-cycle"),
+          localeMatcher: getFieldValue("advanced-options-locale-matcher"),
+          formatMatcher: getFieldValue("advanced-options-format-matcher"),
+        };
+
+        if (useBasicOptions) {
+          return {
+            dateStyle: getFieldValue("basic-date-options"),
+            timeStyle: getFieldValue("basic-time-options"),
+            ...advancedOptions,
+          };
+        } else {
+          return {
+            year: getFieldValue("datetime-options-year"),
+            month: getFieldValue("datetime-options-month"),
+            day: getFieldValue("datetime-options-day"),
+            dayPeriod: getFieldValue("datetime-options-day-period"),
+            weekday: getFieldValue("datetime-options-weekday"),
+            era: getFieldValue("datetime-options-era"),
+            hour: getFieldValue("datetime-options-hour"),
+            minute: getFieldValue("datetime-options-minute"),
+            second: getFieldValue("datetime-options-second"),
+            fractionalSecondDigits: getFieldValue("datetime-options-second-frac"),
+            timeZoneName: getFieldValue("datetime-options-tz-name"),
+            ...advancedOptions,
+          };
+        }
+      }
+
+      const BUILT_IN_DEFAULTS = {
+        localeMatcher: "best fit",
+        formatMatcher: "best fit",
+      };
+
+      function getOptionsWithoutDefaults() {
+        const options = getOptions();
+        // const defaults = new Intl.DateTimeFormat("en-US").resolvedOptions();
+        const optionsToDisplay = {};
+
+        // TODO: toggle between rendering the full "resolved options" and the manually selected options?
+        for (const key in options) {
+          if (options[key] !== BUILT_IN_DEFAULTS[key]) {
+            optionsToDisplay[key] = options[key];
+          }
+        }
+
+        return optionsToDisplay;
+      }
+
+      let formatter = new Intl.DateTimeFormat("en-US", getOptions());
+
+      /* Display */
+      function initLocale() {
+        $localeInput.value = navigator.language;
+      }
+
+      function renderTime() {
+        $timeDisplay.innerHTML = formatter.format(new Date());
+      }
+
+      function renderOptions() {
+        const optionsToDisplay = getOptionsWithoutDefaults();
+        $codeDisplay.innerHTML = JSON.stringify(optionsToDisplay, null, 2);
+      }
+
+      function render() {
+        const locale = $localeInput.value;
+        formatter = new Intl.DateTimeFormat(locale, getOptions());
+
+        const useBasicOptions = getFieldValue("top-options") === "basic";
+        if (useBasicOptions) {
+          $basicOptions.classList.remove("hidden");
+          $dateTimeOptions.classList.add("hidden");
+        } else {
+          $basicOptions.classList.add("hidden");
+          $dateTimeOptions.classList.remove("hidden");
+        }
+
+        renderTime();
+        renderOptions();
+      }
+
+      /* INIT */
+      (() => {
+        initLocale();
+
+        $form.addEventListener("change", () => render());
+        $resetBtn.addEventListener("click", () => {
+          const selectedTopOption = getFieldValue("top-options");
+
+          console.log("Reset form");
+          setTimeout(() => {
+            initLocale();
+            $form.elements["top-options"].value = selectedTopOption;
+            render();
+          }, 0);
+        });
+        setInterval(renderTime, 1000);
+        render();
+      })();
+    </script>
+  </body>
+</html>
