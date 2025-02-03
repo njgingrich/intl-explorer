@@ -199,12 +199,20 @@ function renderOptions() {
 }
 
 function render() {
-  const locale = $localeInput.value;
+  const options = getOptions();
+
+  /* imperative UI updates based on form state */
+  // hide/show advanced options
   const useFullOptions = $optionsSwitch.checked;
   $basicOptions.classList.toggle("hide", useFullOptions);
   $fullOptions.classList.toggle("hide", !useFullOptions);
 
-  formatter = new Intl.DateTimeFormat(locale, getOptions());
+  // disable hourCycle if hour12 is set - hour12 overrides hourCycle
+  const $el = getFormControls($form).find(control => control.name === "hourCycle");
+  $el.disabled = options.hour12 !== undefined;
+  
+  const locale = $localeInput.value;
+  formatter = new Intl.DateTimeFormat(locale, options);
 
   updateURL();
   renderTime();

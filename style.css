@@ -303,9 +303,15 @@ body {
     font-size: 0.8em;
   }
 }
+
+/* utilities */
 .flow > * + * {
   margin-block-start: var(--flow-space, var(--size-2));
 }
+.pushed {
+  margin-block-start: auto;
+}
+/* end utilities */
 
 pre:has(code) {
   width: max-content;
@@ -330,7 +336,6 @@ kbd {
 
 fieldset {
   border: none;
-	border-bottom: 1px solid var(--sand-7);
   padding: 0;
 }
 
@@ -418,10 +423,26 @@ body {
 }
 
 /* Options Form */
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--size-3);
+  height: 100%;
+}
+.form legend {
+	font-weight: var(--font-bold);
+}
+
 .options {
 	padding: var(--size-3) var(--size-2);
 }
-
+.options-container {
+  padding-block: var(--size-3);
+	border-bottom: 1px solid var(--sand-7);
+}
 .options-container__header {
   display: flex;
   justify-content: space-between;
@@ -438,9 +459,6 @@ body {
 	min-width: 84px;
 }
 
-.form legend {
-	font-weight: var(--font-bold);
-}
 
 .columns {
 	display: grid;

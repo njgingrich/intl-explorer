@@ -33,61 +33,26 @@
     <main class="page sidebar">
       <section class="options reduce-fouce">
         <form id="options" name="DateTimeFormat options" class="form">
-          <div class="container-content">
-            <fieldset id="locale-options" class="options-container flow">
-              <!-- <legend>Locale Options</legend> -->
-    
-              <section class="columns">
-                <sl-input data-label="left" label="Locale" name="current-locale" id="current-locale"></sl-input>
-                <sl-input data-label="left" label="Time Zone" name="current-tz" id="current-tz"></sl-input>
-              </section>
-
-              <section id="hour12" class="radio-container">
-                <sl-radio-group label="Hour 12" help-text="Overrides hourCycle, if set" name="hour12" value="unset">
-                  <sl-radio-button variant="primary" value="unset">Unset</sl-radio-button>
-                  <sl-radio-button variant="primary" value="true">True</sl-radio-button>
-                  <sl-radio-button variant="primary" value="false">False</sl-radio-button>
-                </sl-radio-group>
-              </section>
-              <section id="hourCycle" class="radio-container">
-                <sl-radio-group label="Hour Cycle" name="hourCycle" value="unset">
-                  <sl-radio-button variant="primary" value="unset">Unset</sl-radio-button>
-                  <sl-radio-button variant="primary" value="h11">h11</sl-radio-button>
-                  <sl-radio-button variant="primary" value="h12">h12</sl-radio-button>
-                  <sl-radio-button variant="primary" value="h23">h23</sl-radio-button>
-                  <sl-radio-button variant="primary" value="h24">h24</sl-radio-button>
-                </sl-radio-group>
-              </section>
-            </fieldset>
-
-            <section class="options-container">
-              <header class="options-container__header">
-                <h2>Options</h2>
-                <sl-switch name="useFullOptions" id="options-switch">Use Full Options</sl-switch>
-              </header>
+          <fieldset class="options-container flow">
+            <header class="options-container__header">
+              <h2>Options</h2>
+              <sl-switch name="useFullOptions" id="options-switch">Use Full Options</sl-switch>
+            </header>
+            <section id="basic-options">
+              <sl-radio-group label="Date Options" name="dateStyle" value="full">
+                <sl-radio-button variant="primary" value="full">Full</sl-radio-button>
+                <sl-radio-button variant="primary" value="long">Long</sl-radio-button>
+                <sl-radio-button variant="primary" value="medium">Medium</sl-radio-button>
+                <sl-radio-button variant="primary" value="short">Short</sl-radio-button>
+              </sl-radio-group>
+              <sl-radio-group label="Time Options" name="timeStyle" value="full">
+                <sl-radio-button variant="primary" value="full">Full</sl-radio-button>
+                <sl-radio-button variant="primary" value="long">Long</sl-radio-button>
+                <sl-radio-button variant="primary" value="medium">Medium</sl-radio-button>
+                <sl-radio-button variant="primary" value="short">Short</sl-radio-button>
+              </sl-radio-group>
             </section>
-
-            <fieldset id="basic-options" class="options-container flow">
-              <section class="radio-container">
-                <sl-radio-group label="Date Options" name="dateStyle" value="full">
-                  <sl-radio-button variant="primary" value="full">Full</sl-radio-button>
-                  <sl-radio-button variant="primary" value="long">Long</sl-radio-button>
-                  <sl-radio-button variant="primary" value="medium">Medium</sl-radio-button>
-                  <sl-radio-button variant="primary" value="short">Short</sl-radio-button>
-                </sl-radio-group>
-              </section>
-              <section class="radio-container">
-                <sl-radio-group label="Time Options" name="timeStyle" value="full">
-                  <sl-radio-button variant="primary" value="full">Full</sl-radio-button>
-                  <sl-radio-button variant="primary" value="long">Long</sl-radio-button>
-                  <sl-radio-button variant="primary" value="medium">Medium</sl-radio-button>
-                  <sl-radio-button variant="primary" value="short">Short</sl-radio-button>
-                </sl-radio-group>
-              </section>
-            </fieldset>
-            <fieldset id="full-options" class="options-container flow">
-              <legend>Format Options</legend>
-
+            <section id="full-options" class="flow">
               <fieldset id="date-options" class="flow">
                 <legend>Date</legend>
                 <div class="columns">
@@ -140,18 +105,19 @@
                     <sl-option value="2-digit">2-Digit</sl-option>
                     <sl-option value="numeric">Numeric</sl-option>
                   </sl-select>
+                </div>
+                <section id="fractionalSecondsDigit" class="radio-container">
+                  <sl-radio-group label="Second Digits" name="fractionalSecondsDigit" value="unset">
+                    <sl-radio-button variant="primary" value="3">3</sl-radio-button>
+                    <sl-radio-button variant="primary" value="2">2</sl-radio-button>
+                    <sl-radio-button variant="primary" value="1">1</sl-radio-button>
+                    <sl-radio-button variant="primary" value="unset">Unset</sl-radio-button>
+                  </sl-radio-group>
+                </section>
               </fieldset>
-
-              <section id="fractionalSecondsDigit" class="radio-container">
-                <sl-radio-group label="Second Digits" name="fractionalSecondsDigit" value="unset">
-                  <sl-radio-button variant="primary" value="3">3</sl-radio-button>
-                  <sl-radio-button variant="primary" value="2">2</sl-radio-button>
-                  <sl-radio-button variant="primary" value="1">1</sl-radio-button>
-                  <sl-radio-button variant="primary" value="unset">Unset</sl-radio-button>
-                </sl-radio-group>
-              </section>
-
-              <section id="timeZoneName" class="radio-container">
+              <fieldset id="timeZoneName" class="flow">
+                <legend>Time Zone</legend>
+                <sl-input data-label="left" label="Name" name="current-tz" id="current-tz"></sl-input>
                 <div class="form__row">
                   <sl-select label="Length" name="timeZoneNameLength" value="long">
                     <sl-option value="long">Long</sl-option>
@@ -163,41 +129,56 @@
                     <sl-option value="generic">Generic</sl-option>
                   </sl-select>
                 </div>
-              </section>
-            </fieldset>
-    
-            <fieldset id="top-options" class="options-container">
-              <section>
-                <h3>Form Options</h3>
-                <div class="row-group">
-                  <input type="reset" id="reset-form" value="Reset Form" />
-                  <button type="button" id="share-page">Share This Page</button>
-                </div>
-              </section>
-            </fieldset>
-    
-            <fieldset id="advanced-options" class="options-container">
-              <legend>Advanced Options</legend>
+              </fieldset>
+            </section>
+          </fieldset>
 
-              <div class="columns">
-                <section id="localeMatcher" class="radio-container">
-                  <sl-radio-group label="Locale Matcher" name="localeMatcher" value="best fit">
-                    <sl-radio-button variant="primary" value="lookup">Lookup</sl-radio-button>
-                    <sl-radio-button variant="primary" value="best fit">Best Fit</sl-radio-button>
-                  </sl-radio-group>
-                </section>
-                <section id="formatMatcher" class="radio-container">
-                  <sl-radio-group label="Format Matcher" name="formatMatcher" value="best fit">
-                    <sl-radio-button variant="primary" value="basic">Basic</sl-radio-button>
-                    <sl-radio-button variant="primary" value="best fit">Best Fit</sl-radio-button>
-                  </sl-radio-group>
-                </section>
-              </div>
-                
-            </fieldset>
-          </div>
+          <fieldset id="advanced-options" class="options-container flow">
+            <legend>Advanced Options</legend>
+
+            <div class="columns">
+              <sl-input data-label="left" label="Locale" name="current-locale" id="current-locale"></sl-input>
+              <sl-select label="Hour 12" name="hour12" value="" clearable>
+                <sl-option value="true">True</sl-option>
+                <sl-option value="false">False</sl-option>
+              </sl-select>
+              <sl-select label="Hour Cycle" name="hourCycle" value="" clearable>
+                <sl-option value="h11">h11</sl-option>
+                <sl-option value="h12">h12</sl-option>
+                <sl-option value="h23">h23</sl-option>
+                <sl-option value="h24">h24</sl-option>
+              </sl-select>
+            </div>
+            <div class="columns">
+              <section id="localeMatcher">
+                <sl-radio-group label="Locale Matcher" name="localeMatcher" value="best fit">
+                  <sl-radio-button variant="primary" value="lookup">Lookup</sl-radio-button>
+                  <sl-radio-button variant="primary" value="best fit">Best Fit</sl-radio-button>
+                </sl-radio-group>
+              </section>
+              <section id="formatMatcher">
+                <sl-radio-group label="Format Matcher" name="formatMatcher" value="best fit">
+                  <sl-radio-button variant="primary" value="basic">Basic</sl-radio-button>
+                  <sl-radio-button variant="primary" value="best fit">Best Fit</sl-radio-button>
+                </sl-radio-group>
+              </section>
+            </div>
+          </fieldset>
+
+          <section id="top-options" class="options-container pushed">
+            <div class="columns">
+              <sl-button variant="default" id="reset-form">
+                <sl-icon name="arrow-clockwise" aria-hidden="true"></sl-icon>
+                Reset Form
+              </sl-button>
+              <sl-button variant="primary" id="share-page">
+                <sl-icon name="share" aria-hidden="true"></sl-icon>
+                Share This Page
+            </div>
+          </section>
         </form>
       </section>
+
       <section class="content">
         <section id="display" class="container">
           <header class="container__header"><h2>Output</h2></header>
