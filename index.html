@@ -7,6 +7,8 @@
     <!-- Shoelace web components -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/themes/light.css" />
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/shoelace-autoloader.js"></script>
+    <!-- code highlighting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/speed-highlight/core/dist/themes/github-light.css">
 
     <link rel="stylesheet" href="style.css" />   
   </head>
@@ -39,17 +41,19 @@
               <sl-switch name="useFullOptions" id="options-switch">Use Full Options</sl-switch>
             </header>
             <section id="basic-options">
-              <sl-radio-group label="Date Options" name="dateStyle" value="full">
+              <sl-radio-group label="Date Options" name="dateStyle" value="unset">
                 <sl-radio-button variant="primary" value="full">Full</sl-radio-button>
                 <sl-radio-button variant="primary" value="long">Long</sl-radio-button>
                 <sl-radio-button variant="primary" value="medium">Medium</sl-radio-button>
                 <sl-radio-button variant="primary" value="short">Short</sl-radio-button>
+                <sl-radio-button variant="primary" value="unset">Unset</sl-radio-button>
               </sl-radio-group>
-              <sl-radio-group label="Time Options" name="timeStyle" value="full">
+              <sl-radio-group label="Time Options" name="timeStyle" value="unset">
                 <sl-radio-button variant="primary" value="full">Full</sl-radio-button>
                 <sl-radio-button variant="primary" value="long">Long</sl-radio-button>
                 <sl-radio-button variant="primary" value="medium">Medium</sl-radio-button>
                 <sl-radio-button variant="primary" value="short">Short</sl-radio-button>
+                <sl-radio-button variant="primary" value="unset">Unset</sl-radio-button>
               </sl-radio-group>
             </section>
             <section id="full-options" class="flow">
@@ -117,16 +121,15 @@
               </fieldset>
               <fieldset id="timeZoneName" class="flow">
                 <legend>Time Zone</legend>
-                <sl-input data-label="left" label="Name" name="current-tz" id="current-tz"></sl-input>
-                <div class="form__row">
-                  <sl-select label="Length" name="timeZoneNameLength" value="long">
+                <div class="columns">
+                  <sl-input data-label="left" label="Name" name="current-tz" id="current-tz"></sl-input>
+                  <sl-select label="Time Zone Name" name="timeZoneName" value="" clearable>
                     <sl-option value="long">Long</sl-option>
+                    <sl-option value="longOffset">Long (Offset)</sl-option>
+                    <sl-option value="longGeneric">Long (Generic</sl-option>
                     <sl-option value="short">Short</sl-option>
-                  </sl-select>
-                  <sl-select label="Form" name="timeZoneNameForm" value="localized">
-                    <sl-option value="localized">Localized</sl-option>
-                    <sl-option value="offset">Offset</sl-option>
-                    <sl-option value="generic">Generic</sl-option>
+                    <sl-option value="shortOffset">Short (Offset)</sl-option>
+                    <sl-option value="shortGeneric">Short (Generic)</sl-option>
                   </sl-select>
                 </div>
               </fieldset>
@@ -187,10 +190,13 @@
           </div>
         </section>
         <section id="code" class="container">
-          <header class="container__header"><h2>Code</h2></header>
+          <header class="container__header">
+            <h2>Code</h2>
+            <sl-copy-button id="copy-code" size="small"></sl-copy-button>
+          </header>
           <div class="container__content">
             <code>
-              <pre id="code-display"></pre>
+              <pre id="code-display" class="shj-lang-js"></pre>
             </code>
           </div>
         </section>

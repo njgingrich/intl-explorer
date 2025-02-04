@@ -416,6 +416,8 @@ body {
   padding-inline: var(--size-3);
   padding-block: var(--size-2);
   border-bottom: 1px solid var(--sand-7);
+  display: flex;
+  justify-content: space-between;
 }
 .container__content {
   padding-inline: var(--size-3);
@@ -474,6 +476,9 @@ body {
   text-align: center;
   font-size: var(--size-8);
   font-weight: bold;
+}
+#copy-code::part(button) {
+  border: 1px solid var(--sand-7);
 }
 .reduce-fouce {
 	opacity: 0;

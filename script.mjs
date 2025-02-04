@@ -1,4 +1,5 @@
 import { getFormControls } from 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/utilities/form.js';
+import { highlightElement } from 'https://cdn.jsdelivr.net/gh/speed-highlight/core/dist/index.js';
 
 /* DOM Elements */
 const $timeDisplay = document.getElementById("time-display");
@@ -6,6 +7,7 @@ const $codeDisplay = document.getElementById("code-display");
 const $form = document.getElementById("options");
 const $resetBtn = document.getElementById("reset-form");
 const $shareBtn = document.getElementById("share-page");
+const $copyBtn = document.getElementById("copy-code");
 
 const $optionsSwitch = document.getElementById("options-switch");
 const $basicOptions = document.getElementById("basic-options");
@@ -47,17 +49,6 @@ function setFieldValue(fieldName, value) {
   }
 }
 
-function getTimeZoneName() {
-  const length = getFieldValue("timeZoneNameLength");
-  const form = getFieldValue("timeZoneNameForm");
-
-  switch (form) {
-    case 'offset': return `${length}Offset`;
-    case 'generic': return `${length}Generic`;
-    default: return length;
-  }
-}
-
 function getOptions() {
   const useFullOptions = $optionsSwitch.checked;
 
@@ -81,7 +72,7 @@ function getOptions() {
       minute: getFieldValue("minute"),
       second: getFieldValue("second"),
       fractionalSecondDigits: getFieldValue("fractionalSecondsDigit"),
-      timeZoneName: getTimeZoneName(),
+      timeZoneName: getFieldValue("timeZoneName"),
       ...advancedOptions,
     };
   } else {
@@ -116,14 +107,20 @@ function getOptionsWithoutDefaults() {
 function getOptionsAsParams() {
   const options = getOptionsWithoutDefaults();
 
+  const params = new URLSearchParams();
+  if ($optionsSwitch.checked === true) {
+    params.set('useFullOptions', 'true');
+  }
+
   if (Object.keys(options).length === 0) {
-    return new URLSearchParams();
+    return params;
   }
 
   const stringified = JSON.stringify(options);
   const encodedParams = window.btoa(stringified);
 
-  return new URLSearchParams({ options: encodedParams, useFullOptions: $optionsSwitch.checked });
+  params.set('options', encodedParams);
+  return params;
 }
 
 let formatter;
@@ -146,46 +143,16 @@ function initLocale() {
 function initOptions() {
   const params = new URLSearchParams(window.location.search);
   const useFullOptions = params.get('useFullOptions');
-  setFieldValue('useFullOptions', useFullOptions);
+  setFieldValue('useFullOptions', useFullOptions === 'true' ? true : false);
   
   const encodedOptions = params.get("options");
   if (!encodedOptions) {
     return;
   }
   const paramOptions = JSON.parse(window.atob(encodedOptions));
-  console.log({ paramOptions });
 
   for (const [key, val] of Object.entries(paramOptions)) {
-    if (key === "timeZoneName") {
-      switch (val) {
-        case 'long':
-          setFieldValue("timeZoneNameLength", "long");
-          setFieldValue("timeZoneNameForm", "localized");
-          break;
-        case 'short':
-          setFieldValue("timeZoneNameLength", "short");
-          setFieldValue("timeZoneNameForm", "localized");
-          break;
-        case 'longOffset':
-          setFieldValue("timeZoneNameLength", "long");
-          setFieldValue("timeZoneNameForm", "offset");
-          break;
-        case 'shortOffset':
-          setFieldValue("timeZoneNameLength", "short");
-          setFieldValue("timeZoneNameForm", "offset");
-          break;
-        case 'longGeneric':
-          setFieldValue("timeZoneNameLength", "long");
-          setFieldValue("timeZoneNameForm", "generic");
-          break;
-        case 'shortGeneric':
-          setFieldValue("timeZoneNameLength", "short");
-          setFieldValue("timeZoneNameForm", "generic");
-          break;
-      }
-    } else {
-      setFieldValue(key, val);
-    }
+    setFieldValue(key, val);
   }
 }
 
@@ -195,7 +162,11 @@ function renderTime() {
 
 function renderOptions() {
   const optionsToDisplay = getOptionsWithoutDefaults();
-  $codeDisplay.innerHTML = JSON.stringify(optionsToDisplay, null, 2);
+  const message = `new Intl.DateTimeFormat('${$localeInput.value}', ${JSON.stringify(optionsToDisplay, null, 2)}).format(new Date());`;
+  $codeDisplay.innerHTML = message;
+  highlightElement($codeDisplay);
+
+  $copyBtn.value = message;
 }
 
 function render() {
@@ -219,24 +190,9 @@ function render() {
   renderOptions();
 }
 
-async function ensureTabs() {
-  await customElements.whenDefined('sl-tab');
-
-  return new Promise(resolve => {
-    const interval = setInterval(() => {
-      const oneSelected = document.querySelector("sl-tab[active]");
-      if (oneSelected) {
-        clearInterval(interval);
-        resolve();
-        return;
-      }
-    }, 10);
-  });
-}
-
 /* INIT */
 (async () => {
-  const customElementsUsed = ['sl-input', 'sl-radio-button', 'sl-radio-group', 'sl-switch', 'sl-select', 'sl-option'];
+  const customElementsUsed = ['sl-input', 'sl-radio-button', 'sl-radio-group', 'sl-switch', 'sl-select', 'sl-option', 'sl-copy-button'];
   await Promise.race([
     // Load all custom elements
     Promise.allSettled(customElementsUsed.map(el => customElements.whenDefined(el))),
@@ -253,6 +209,7 @@ async function ensureTabs() {
   document.addEventListener('sl-change', () => render());
 
   $resetBtn.addEventListener("click", () => {
+    $form.reset();
     setTimeout(() => {
       initLocale();
       render();
