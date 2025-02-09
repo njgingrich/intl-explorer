@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Intl Explorer</title>
+    <!-- Shoelace web components -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/themes/light.css" />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/shoelace-autoloader.js"></script>
+    <!-- code highlighting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/speed-highlight/core/dist/themes/github-light.css">
+
+    <link rel="stylesheet" href="style.css" />   
+  </head>
+  <body>
+    <header class="header">
+      <a href="/">
+        <h1>Intl Explorer</h1>
+      </a>
+      <nav class="header__nav">
+        <ul>
+          <li>
+            <a href="datetime.html" class="active">DateTimeFormat</a>
+          </li>
+          <li>
+            <a href="relativetime.html">RelativeTimeFormat</a>
+          </li>
+          <li>
+            <a href="number.html">NumberFormat</a>
+          </li>
+          <li>
+            <a href="list.html">ListFormat</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="page sidebar">
+      <section class="options reduce-fouce">
+        <form id="options" name="DateTimeFormat options" class="form">
+          <fieldset class="options-container flow">
+            <header class="options-container__header">
+              <h2>Options</h2>
+              <sl-switch name="useFullOptions" id="options-switch">Use Full Options</sl-switch>
+            </header>
+            <section id="basic-options" class="flow">
+              <sl-radio-group label="Date Options" name="dateStyle" value="unset">
+                <sl-radio-button variant="primary" value="full">Full</sl-radio-button>
+                <sl-radio-button variant="primary" value="long">Long</sl-radio-button>
+                <sl-radio-button variant="primary" value="medium">Medium</sl-radio-button>
+                <sl-radio-button variant="primary" value="short">Short</sl-radio-button>
+                <sl-radio-button variant="primary" value="unset">Unset</sl-radio-button>
+              </sl-radio-group>
+              <sl-radio-group label="Time Options" name="timeStyle" value="unset">
+                <sl-radio-button variant="primary" value="full">Full</sl-radio-button>
+                <sl-radio-button variant="primary" value="long">Long</sl-radio-button>
+                <sl-radio-button variant="primary" value="medium">Medium</sl-radio-button>
+                <sl-radio-button variant="primary" value="short">Short</sl-radio-button>
+                <sl-radio-button variant="primary" value="unset">Unset</sl-radio-button>
+              </sl-radio-group>
+            </section>
+            <section id="full-options" class="flow">
+              <fieldset id="date-options" class="flow">
+                <legend>Date</legend>
+                <div class="columns">
+                  <sl-select name="year" label="Year" value="" clearable>
+                    <sl-option value="2-digit">2-Digit</sl-option>
+                    <sl-option value="numeric">Numeric</sl-option>
+                  </sl-select>
+                  <sl-select name="month" label="Month" value="" clearable>
+                    <sl-option value="2-digit">2-Digit</sl-option>
+                    <sl-option value="numeric">Numeric</sl-option>
+                    <sl-option value="long">Long</sl-option>
+                    <sl-option value="short">Short</sl-option>
+                    <sl-option value="narrow">Narrow</sl-option>
+                  </sl-select>
+                  <sl-select name="day" label="Day" value="" clearable>
+                    <sl-option value="2-digit">2-Digit</sl-option>
+                    <sl-option value="numeric">Numeric</sl-option>
+                  </sl-select>
+                </div>
+                <div class="columns">
+                  <sl-select name="dayPeriod" label="Day Period" value="" clearable>
+                    <sl-option value="long">Long</sl-option>
+                    <sl-option value="short">Short</sl-option>
+                    <sl-option value="narrow">Narrow</sl-option>
+                  </sl-select>
+                  <sl-select name="weekday" label="Weekday" value="" clearable>
+                    <sl-option value="long">Long</sl-option>
+                    <sl-option value="short">Short</sl-option>
+                    <sl-option value="narrow">Narrow</sl-option>
+                  </sl-select>
+                  <sl-select name="era" label="Era" value="" clearable>
+                    <sl-option value="long">Long</sl-option>
+                    <sl-option value="short">Short</sl-option>
+                    <sl-option value="narrow">Narrow</sl-option>
+                  </sl-select>
+                </div>
+              </fieldset>
+              <fieldset id="time-options" class="flow">
+                <legend>Time</legend>
+                <div class="columns">
+                  <sl-select name="hour" label="Hour" value="" clearable>
+                    <sl-option value="2-digit">2-Digit</sl-option>
+                    <sl-option value="numeric">Numeric</sl-option>
+                  </sl-select>
+                  <sl-select name="minute" label="Minute" value="" clearable>
+                    <sl-option value="2-digit">2-Digit</sl-option>
+                    <sl-option value="numeric">Numeric</sl-option>
+                  </sl-select>
+                  <sl-select name="second" label="Second" value="" clearable>
+                    <sl-option value="2-digit">2-Digit</sl-option>
+                    <sl-option value="numeric">Numeric</sl-option>
+                  </sl-select>
+                </div>
+                <section id="fractionalSecondsDigit" class="radio-container">
+                  <sl-radio-group label="Second Digits" name="fractionalSecondsDigit" value="unset">
+                    <sl-radio-button variant="primary" value="3">3</sl-radio-button>
+                    <sl-radio-button variant="primary" value="2">2</sl-radio-button>
+                    <sl-radio-button variant="primary" value="1">1</sl-radio-button>
+                    <sl-radio-button variant="primary" value="unset">Unset</sl-radio-button>
+                  </sl-radio-group>
+                </section>
+              </fieldset>
+              <fieldset id="timeZoneName" class="flow">
+                <legend>Time Zone</legend>
+                <div class="columns">
+                  <sl-input data-label="left" label="Name" name="timeZone"></sl-input>
+                  <sl-select label="Time Zone Name" name="timeZoneName" value="" clearable>
+                    <sl-option value="long">Long</sl-option>
+                    <sl-option value="longOffset">Long (Offset)</sl-option>
+                    <sl-option value="longGeneric">Long (Generic)</sl-option>
+                    <sl-option value="short">Short</sl-option>
+                    <sl-option value="shortOffset">Short (Offset)</sl-option>
+                    <sl-option value="shortGeneric">Short (Generic)</sl-option>
+                  </sl-select>
+                </div>
+              </fieldset>
+            </section>
+          </fieldset>
+
+          <fieldset id="advanced-options" class="options-container flow">
+            <legend>Advanced Options</legend>
+
+            <div class="columns">
+              <sl-input data-label="left" label="Locale" name="current-locale" id="current-locale"></sl-input>
+              <sl-select label="Hour 12" name="hour12" value="" clearable>
+                <sl-option value="true">True</sl-option>
+                <sl-option value="false">False</sl-option>
+              </sl-select>
+              <sl-select label="Hour Cycle" name="hourCycle" value="" clearable>
+                <sl-option value="h11">h11</sl-option>
+                <sl-option value="h12">h12</sl-option>
+                <sl-option value="h23">h23</sl-option>
+                <sl-option value="h24">h24</sl-option>
+              </sl-select>
+            </div>
+            <div class="columns">
+              <section id="localeMatcher">
+                <sl-radio-group label="Locale Matcher" name="localeMatcher" value="best fit">
+                  <sl-radio-button variant="primary" value="lookup">Lookup</sl-radio-button>
+                  <sl-radio-button variant="primary" value="best fit">Best Fit</sl-radio-button>
+                </sl-radio-group>
+              </section>
+              <section id="formatMatcher">
+                <sl-radio-group label="Format Matcher" name="formatMatcher" value="best fit">
+                  <sl-radio-button variant="primary" value="basic">Basic</sl-radio-button>
+                  <sl-radio-button variant="primary" value="best fit">Best Fit</sl-radio-button>
+                </sl-radio-group>
+              </section>
+            </div>
+          </fieldset>
+
+          <section id="top-options" class="options-container pushed">
+            <div class="columns">
+              <sl-button variant="default" id="reset-form">
+                <sl-icon name="arrow-clockwise" aria-hidden="true"></sl-icon>
+                Reset Form
+              </sl-button>
+              <sl-button variant="primary" id="share-page">
+                <sl-icon name="share" aria-hidden="true"></sl-icon>
+                Share This Page
+            </div>
+          </section>
+        </form>
+      </section>
+
+      <section class="content">
+        <section id="display" class="container">
+          <header class="container__header"><h2>Output</h2></header>
+          <div class="container__content">
+            <span id="time-display"></span>
+          </div>
+        </section>
+        <section id="code" class="container">
+          <header class="container__header">
+            <h2>Code</h2>
+            <sl-copy-button id="copy-code" size="small"></sl-copy-button>
+          </header>
+          <div class="container__content">
+            <code>
+              <pre id="output-display" class="shj-lang-js"></pre>
+            </code>
+          </div>
+        </section>
+      </section>
+
+    </main>
+
+    <script type="module" src="./datetime.mjs"></script>
+  </body>
+</html>

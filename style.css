@@ -390,7 +390,6 @@ body {
 .sidebar {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--size-1);
 }
 .sidebar:not([data-direction]) > :first-child {
   flex-basis: var(--sidebar-target-width, 32rem);
@@ -440,6 +439,7 @@ body {
 
 .options {
 	padding: var(--size-3) var(--size-2);
+  border-right: 1px solid var(--sand-7);
 }
 .options-container {
   padding-block: var(--size-3);
@@ -486,6 +486,16 @@ body {
 .hide {
   display: none;
 }
+a:active, a:visited {
+  color: var(--color-dark);
+}
+a:active {
+  transform: scale(99%);
+}
+a.active {
+  color: var(--color-primary);
+}
+
 
 /* Shoelace overrides */
 :root,
